@@ -19,7 +19,7 @@ function showOEE(){
             }
         },
         legend: {
-            data:['OEE实时值', 'OEE预测值']
+            data:['OEE实时值']
         },
         toolbox: {
             show: false,
@@ -76,7 +76,7 @@ function showOEE(){
                     return res;
                 })()
             },
-            {
+            /*{
                 name:'OEE预测值',
                 type:'line',
                 data:(function (){// 数组初始化
@@ -88,7 +88,7 @@ function showOEE(){
                     }
                     return res;
                 })()
-            }
+            }*/
         ]
     };
 
@@ -97,16 +97,16 @@ function showOEE(){
         axisData = (new Date()).toLocaleTimeString().replace(/^\D*/,'');
 
         var data0 = option.series[0].data;
-        var data1 = option.series[1].data;
+        // var data1 = option.series[1].data;
         data0.shift();
         data0.push(getOEE()*100);
-        data1.shift();
-        data1.push(getOEE()*100+10);
+        // data1.shift();
+        // data1.push(getOEE()*100+10);
 
         option.xAxis[0].data.shift();
         option.xAxis[0].data.push(axisData);
         myChart.setOption(option);
-    }, 2100);
+    }, $("#time2").val()*1000*2);
     ;
     if (option && typeof option === "object") {
         myChart.setOption(option, true);

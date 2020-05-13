@@ -1,6 +1,7 @@
 /*开始生产*/
 function produce() {
     sendAjax("produce");
+    Get_Cycle_Time();
 }
 /*计划停机*/
 //开始
@@ -58,10 +59,64 @@ function Small_Stop_Time_End() {
 }
 /*次品检测*/
 function Set_Reject() {
-    alert("功能开发中");
+    $.ajax({
+        url:"Set_Reject",
+        type:"get",
+        data:{
+            Reject_Count:$("#DefectValue").val()
+        },
+        async:false,//必须设置为同步，否则赋值失败
+        success:function(result)
+        {
+            $("#setDefect").modal("hide");// 隐藏模态框
+            alert(result)
+        }
+    });
 }
 /*速度调整*/
 function Set_Speed() {
-    alert("功能开发中");
+    $.ajax({
+        url:"Set_Cycle_Time",
+        type:"get",
+        data:{
+            Theoretical_Cycle_Time:$("#Theoretical_Cycle_Time").val(),
+            Actual_Cycle_Time:$("#Actual_Cycle_Time").val(),
+        },
+        async:false,//必须设置为同步，否则赋值失败
+        success:function(result)
+        {
+            $("#modifySpeed").modal("hide");// 隐藏模态框
+            alert(result)
+            Get_Cycle_Time()
+        }
+    });
 }
-/*发送ajax请求*/
+/*更新理论循环时间、实际循环时间*/
+function Get_Cycle_Time() {
+    $.ajax({
+        url:"Get_Cycle_Time",
+        type:"get",
+        async:false,//必须设置为同步，否则赋值失败
+        success:function(result)
+        {
+            var time=result.split(",");
+
+            $("#time1").val(time[0]);
+            $("#time2").val(time[1]);
+            var oee=getOEE()*100;
+            var i;
+            if(oee>75){
+                $("#state").val("工业产品性能优良，经济效益良好");
+            }else if(oee>65){
+                $("#state").val("工业产品性能一般，经济效益一般");
+            }else if(oee>55){
+                $("#state").val("工业产品性能不稳，经济效益持平");
+            }else if(oee>40){
+                $("#state").val("工业产品性能低下，经济效益亏损");
+            }else{
+                $("#state").val("工业产品性能严重异常，应立即停产进行整改");
+            }
+        }
+    });
+}
+

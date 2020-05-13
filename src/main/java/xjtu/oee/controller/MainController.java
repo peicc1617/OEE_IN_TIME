@@ -3,10 +3,7 @@ package xjtu.oee.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.DecimalFormat;
 import java.util.Date;
@@ -26,7 +23,7 @@ public class MainController {
     private int Total_Reject_Count;// 不合格品总数
     private int Total_Good_Count;// 合格品总数
     private double Theoretical_Cycle_Time=1.0;//理论循环时间
-    private double Actual_Cycle_Time=2.0;//实际循环时间
+    private double Actual_Cycle_Time=1.2;//实际循环时间
     /*************************OEE计算指标**************************/
     /*日历时间*/
     private long All_Time;//日历时间
@@ -235,7 +232,7 @@ public class MainController {
                         }
                         //生产零件
                         try {
-                            Thread.sleep(2000);
+                            Thread.sleep((long)Actual_Cycle_Time*1000);
                             Total_Count++;
                             Total_Good_Count=Total_Count-Total_Reject_Count;
                             log.info("当前已生产"+Total_Count+"个零件","其中合格零件："+Total_Good_Count+"个","不合格零件："+Total_Reject_Count+"个");
@@ -485,11 +482,22 @@ public class MainController {
         return String.valueOf(Small_Stop_Count);
     }
     /*不合格品*/
-    @RequestMapping("/Set_Reject")
+    @RequestMapping(method = RequestMethod.GET,value = "/Set_Reject")
     public String Set_Reject(@RequestParam(value="Reject_Count") long Reject_Count){
         Total_Reject_Count+=Reject_Count;
         Total_Good_Count=Total_Count-Total_Reject_Count;
         return "不合格品总数为："+Total_Reject_Count+"合格品总数为："+Total_Good_Count+"产品总数为："+Total_Count;
     }
-
+    //设置理论循环时间、实际循环时间
+    @RequestMapping("/Set_Cycle_Time")
+    public String Set_Cycle_Time(@RequestParam(value="Theoretical_Cycle_Time") double Theoretical_Cycle_Time,@RequestParam(value="Actual_Cycle_Time") double Actual_Cycle_Time){
+        this.Theoretical_Cycle_Time=Theoretical_Cycle_Time;
+        this.Actual_Cycle_Time=Actual_Cycle_Time;
+        return "理论循环时间更改为:"+this.Theoretical_Cycle_Time+"实际循环时间更改为:"+this.Actual_Cycle_Time;
+    }
+    //获取理论循环时间、实际循环时间
+    @RequestMapping("/Get_Cycle_Time")
+    public String Get_Cycle_Time(){
+        return Theoretical_Cycle_Time+","+Actual_Cycle_Time;
+    }
 }

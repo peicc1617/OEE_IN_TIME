@@ -3,13 +3,15 @@ jQuery(function($) {
     showOEE();
     //显示三大指标
     showOtherThreeIndicators();
+});
+function init() {
     //显示六大损失、
     showAvailabilityLossTime();
     showPerformanceLossTime();
     showQualityossTime();
     showProduct();
-    showCount();
+    // showCount();
     showTime();
-    showTopLoss();
+    // showTopLoss();
     showLossTime();
-});
+}

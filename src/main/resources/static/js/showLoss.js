@@ -287,6 +287,7 @@ function showProduct() {
         myChart.setOption(option, true);
     }
 }
+/*
 //次数统计
 function showCount() {
     var dom = document.getElementById("Count_Container");
@@ -389,4 +390,4 @@ function showTopLoss() {
 }
 function sortLossTime() {
     
-}
+}*/

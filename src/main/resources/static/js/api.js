@@ -21,11 +21,11 @@ function getTotal_Count() {
 }
 //不合格产品数量
 function getTotal_Reject_Count() {
-    sendAjax("getTotal_Reject_Count");
+    return sendAjax("getTotal_Reject_Count");
 }
 //合格品数量
 function getTotal_Good_Count() {
-    sendAjax("getTotal_Good_Count");
+    return sendAjax("getTotal_Good_Count");
 }
 /*获取计划停机时间*/
 function getSchedule_Stop_Time() {

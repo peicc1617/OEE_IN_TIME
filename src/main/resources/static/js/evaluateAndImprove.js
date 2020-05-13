@@ -4,31 +4,31 @@ function evaluateLevel() {
         {
             'id':1,
             'oee':'大于75%',
-            'description':'设备性能优良，经济效益良好',
+            'description':'工业产品性能优良，经济效益良好',
             'level':'A'
         },
         {
             'id':2,
             'oee':'65%-75%',
-            'description':'设备性能一般，经济效益一般',
+            'description':'工业产品性能一般，经济效益一般',
             'level':'B'
         },
         {
             'id':3,
             'oee':'55%-65%',
-            'description':'设备性能不稳，经济效益持平',
+            'description':'工业产品性能不稳，经济效益持平',
             'level':'C'
         },
         {
             'id':4,
             'oee':'40%-55%',
-            'description':'设备性能低下，经济效益亏损',
+            'description':'工业产品性能低下，经济效益亏损',
             'level':'D'
         },
         {
             'id':5,
             'oee':'小于40%',
-            'description':'设备性能严重异常，应立即停产进行整改',
+            'description':'工业产品性能严重异常，应立即停产进行整改',
             'level':'E'
         }
     ];
