@@ -100,13 +100,15 @@ function showOEE(){
         // var data1 = option.series[1].data;
         data0.shift();
         data0.push(getOEE()*100);
+        // console.log("data:"+option.series[0].data);
+        // console.log("data0:"+data0);
         // data1.shift();
         // data1.push(getOEE()*100+10);
 
         option.xAxis[0].data.shift();
         option.xAxis[0].data.push(axisData);
         myChart.setOption(option);
-    }, $("#time2").val()*1000*2);
+    }, 1000);
     ;
     if (option && typeof option === "object") {
         myChart.setOption(option, true);
@@ -293,10 +295,10 @@ function showOtherThreeIndicators() {
         ]
     };
     setInterval(function (){
-        option.series[0].data[0].value = getAvailability()*100 - 0;
-        option.series[1].data[0].value = getPerformance()*100 - 0;
-        option.series[2].data[0].value = getQuality()*100 - 0;
-        option.series[3].data[0].value = getOEE()*100 - 0;
+        option.series[0].data[0].value = (getAvailability()*100).toFixed(0) - 0;
+        option.series[1].data[0].value = (getPerformance()*100).toFixed(0) - 0;
+        option.series[2].data[0].value = (getQuality()*100).toFixed(0) - 0;
+        option.series[3].data[0].value = (getOEE()*100).toFixed(0) - 0;
         myChart.setOption(option,true);
     },1000);
     if (option && typeof option === "object") {
